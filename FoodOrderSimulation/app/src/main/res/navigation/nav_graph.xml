@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/OrdersFragment">
+
+    <fragment
+        android:id="@+id/OrdersFragment"
+        android:name="com.kys.foodordersimulation.ui.view.FoodOrdersFragment"
+        android:label="@string/food_order_fragment_label"
+        tools:layout="@layout/fragment_food_orders">
+
+        <action
+            android:id="@+id/action_FoodOrderFragment_to_OrderDetailsFragment"
+            app:destination="@id/OrderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/OrderDetailsFragment"
+        android:name="com.kys.foodordersimulation.ui.view.OrderDetailsFragment"
+        android:label="@string/order_detail_fragment_label"
+        tools:layout="@layout/fragment_order_details">
+
+        <action
+            android:id="@+id/action_OrderDetailsFragment_to_FoodOrderFragment"
+            app:destination="@id/OrdersFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FoodOrderSimulation</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="food_order_fragment_label">Food Orders</string>
+    <string name="order_detail_fragment_label">Food Order Details</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="place_order">Place Order</string>
+</resources>
