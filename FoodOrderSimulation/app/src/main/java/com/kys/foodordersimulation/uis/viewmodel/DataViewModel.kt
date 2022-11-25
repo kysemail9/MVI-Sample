@@ -4,30 +4,21 @@ import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kys.foodordersimulation.data.database.entities.FoodOrderTableEntity
 import com.kys.foodordersimulation.data.model.Data
 import com.kys.foodordersimulation.data.model.FoodOrder
 import com.kys.foodordersimulation.data.repository.MainRepository
 import com.kys.foodordersimulation.uis.adapter.MainAdapter
 import com.kys.foodordersimulation.uis.intent.DataIntent
 import com.kys.foodordersimulation.uis.viewstate.DataState
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import kotlin.math.*
-import kotlin.random.Random
 
 class DataViewModel(
     private val repository: MainRepository
 ) : ViewModel() {
 
-    val dataIntent = MutableStateFlow<DataIntent?>(null)//Channel<DataIntent>(Channel.UNLIMITED)
+    val dataIntent = MutableStateFlow<DataIntent?>(null)
     val dataState = MutableStateFlow<DataState>(DataState.Inactive)
-
-    //private var newFoodOrderId = 11 // newFoodOrderId = new unique order id generated
 
     init {
         handleIntent()
@@ -35,15 +26,6 @@ class DataViewModel(
 
     private fun handleIntent() {
         viewModelScope.launch {
-            /* dataIntent.consumeAsFlow().collect {
-                when (it) {
-                    is DataIntent.FetchData -> fetchData()
-                    is DataIntent.UpdateFoodOrderState -> {
-                        Log.e("DVM", "K update food order state")
-                        updateFoodOrderStateForOrder()
-                    }
-                }
-            }*/
             dataIntent.collect {
                 when (it) {
                     is DataIntent.FetchData -> {
@@ -144,15 +126,7 @@ class DataViewModel(
             } catch (e: Exception) {
                 DataState.Error(e.localizedMessage)
             }
-            //testTry() // TODO REMOVE THIS
         }
-    }
-
-    private fun testTry() {
-        // - let's do one CRUD operation
-        //val size = repository.getFoodOrders().size // working
-        //Log.e("K", "K size = $size")
-        //repository.placeDummyOrder("9") // - working "9" can b any unique number
     }
 
     private fun updateFoodOrderStateForOrder(foodOrder: FoodOrder, adapterPosition: Int) {
@@ -166,7 +140,7 @@ class DataViewModel(
             3 -> { // change to 4
                 updateOrder("Delivered", 4, foodOrder)
             }
-            4 -> { // delete after 15 seconds // todo  - this should be automatic job
+            4 -> { // delete after 15 seconds // this should be automatic job
                 Log.e("DVM", "K 4 - foodOrderStateType = " + foodOrder.orderStateTypeNow)
                 deleteAfterSomeTime(foodOrder, adapterPosition)
             }
@@ -228,21 +202,5 @@ class DataViewModel(
                 DataState.Error(e.localizedMessage)
             }
         }
-    }
-
-
-    enum class FoodOrderEnumState(val stateType: Int) {
-        NEW(1),
-        PREPARING(2),
-        READY(3),
-        DELIVERED(4)
-        // 1 - New , 2 - Preparing, 3 - Ready , 4 - Delivered
-        /*companion object {
-            fun getTypeName() = values().size
-        }*/
-    }
-
-    fun getRandomUnique() {
-        //val source = abs(Random(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)).nextLong())
     }
 }

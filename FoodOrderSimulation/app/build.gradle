@@ -74,23 +74,4 @@ dependencies {
     // paging
     implementation("androidx.paging:paging-runtime-ktx:3.1.1")
 
-
-  /*
-
-    // Koin dependency injection
-    implementation 'org.koin:koin-android:2.0.1'
-    implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
-    implementation 'org.koin:koin-androidx-scope:2.0.1'
-    implementation 'org.koin:koin-android-architecture:0.9.1'
-
-    implementation "androidx.fragment:fragment-ktx:1.3.6"
-    implementation "androidx.activity:activity-ktx:1.3.1"
-
-    // For ViewModel
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-
-    // Speed-up Android development: using for no code recyclerview
-    implementation 'com.github.shannon-rodricks:android-bootstrap:0.0.1'*/
-
 }

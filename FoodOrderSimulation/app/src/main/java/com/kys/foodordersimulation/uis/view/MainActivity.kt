@@ -150,8 +150,6 @@ class MainActivity : AppCompatActivity(), MainAdapter.FoodOrderItemChangeStateCa
                         Log.e("MA", "K place order SUCCESS")
                         progressBar.visibility = View.GONE
                         buttonPlaceOrder.visibility = View.VISIBLE
-
-                        addAndRefreshList()
                     }
                     is DataState.PlaceOrderError -> {
                         progressBar.visibility = View.GONE
@@ -159,19 +157,12 @@ class MainActivity : AppCompatActivity(), MainAdapter.FoodOrderItemChangeStateCa
                         Log.e("MA", "K place order ERROR = ${it.error}")
                     }
                     is DataState.LoadFoodOrderDetails -> {
-
                         Log.e("MA", "K load food order details")
-
-                        // load new activity or fragment
-
+                        // todo - pending -> load new activity or fragment
                     }
                 }
             }
         }
-    }
-
-    private fun addAndRefreshList() {
-        //DataIntent.FetchData
     }
 
     private fun refreshList() {
@@ -192,12 +183,6 @@ class MainActivity : AppCompatActivity(), MainAdapter.FoodOrderItemChangeStateCa
     override fun onFoodOrderItemStateClicked(foodOrder: FoodOrder, adapterPosition: Int) {
         Log.e("MA", "K item clicked at index $adapterPosition")
         lifecycleScope.launch {
-            /*dataViewModel.dataIntent.send(
-                DataIntent.UpdateFoodOrderState(
-                    foodOrder,
-                    adapterPosition
-                )
-            )*/
             dataViewModel.dataIntent.value =
                 DataIntent.UpdateFoodOrderState(foodOrder, adapterPosition)
         }
